@@ -1,7 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { command } from "./command";
 
 @Entity()
-export class role {
+export class status {
   @PrimaryGeneratedColumn()
   id: number;
 

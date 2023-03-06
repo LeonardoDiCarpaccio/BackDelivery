@@ -1,5 +1,5 @@
-export const config =  {
-    secret: "supersecret",
-    user : 'secretuser',
-    outDir : './build'
-  };
+export const config = {
+  secret: "supersecret",
+  user: "secretuser",
+  outDir: "./build",
+};

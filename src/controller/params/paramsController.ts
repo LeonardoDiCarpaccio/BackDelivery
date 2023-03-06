@@ -1,43 +1,43 @@
 import { getManager } from "typeorm";
 import { Request, Response } from "express";
-import { role } from "../../entities/role";
+import { params } from "../../entities/params";
 import { crudMethods } from "../../helpers/crudMethods";
 
-export class roleController {
+export class paramsController {
   public async getAll(request: Request, response: Response) {
-    const roleRepository = getManager().getRepository(role);
-    const result = await roleRepository.find({});
+    const paramsRepository = getManager().getRepository(params);
+    const result = await paramsRepository.find({});
     response.send(result);
   }
 
   public async getById(request: Request, response: Response) {
-    const roleRepository = getManager().getRepository(role);
-    const result = await roleRepository.find({
+    const paramsRepository = getManager().getRepository(params);
+    const result = await paramsRepository.find({
       where: { id: request.body.id },
     });
     response.send(result);
   }
   public async findBy(request: Request, response: Response) {
-    const roleRepository = getManager().getRepository(role);
+    const paramsRepository = getManager().getRepository(params);
 
     const where = crudMethods.buildWhereClause(request.body);
 
-    const result = await roleRepository.find(where);
+    const result = await paramsRepository.find(where);
 
     response.send(result);
   }
   // insert with no id, update with id
   public async save(request: Request, response: Response) {
-    const roleRepository = getManager().getRepository(role);
-    const result = await roleRepository.save(request.body);
+    const paramsRepository = getManager().getRepository(params);
+    const result = await paramsRepository.save(request.body);
     response.send(result);
   }
 
   public async delete(request: Request, response: Response) {
-    const roleRepository = getManager().getRepository(role);
-    const result = await roleRepository.delete({ id: request.body.id });
+    const paramsRepository = getManager().getRepository(params);
+    const result = await paramsRepository.delete({ id: request.body.id });
     response.send(result);
   }
 }
 
-export const roleMethods = new roleController();
+export const paramsMethods = new paramsController();
