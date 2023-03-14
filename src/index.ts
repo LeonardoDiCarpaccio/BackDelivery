@@ -5,7 +5,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import { AppRoutes } from "./routes";
 const cors = require("cors");
-
+const path = require("path");
 // create connection with database
 // note that it's not active database connection
 // TypeORM creates connection pools and uses them for your requests
@@ -65,8 +65,12 @@ createConnection()
         }
       );
     });
+    app.use(express.static(path.join(__dirname, "../../dist/syneview.app")));
 
-    app.use("/app", express.static("../app"));
+    app.get("/", function (req, res) {
+      res.sendFile(path.join(__dirname, "../../dist/syneview.app/index.html"));
+    });
+    // app.use("/app", express.static("../app"));
     // run app
     app.listen(3000);
 
