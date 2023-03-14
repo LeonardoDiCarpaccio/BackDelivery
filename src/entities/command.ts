@@ -8,6 +8,7 @@ import {
   JoinTable,
   PrimaryColumn,
   Timestamp,
+  CreateDateColumn,
 } from "typeorm";
 import { status } from "./status";
 import { user } from "./user";
@@ -35,6 +36,8 @@ export class command {
 
   @Column({ nullable: true, type: "double precision" })
   creationDate: number;
+  // @CreateDateColumn({ nullable: true })
+  // creationDate: Date;
 
   @Column({ nullable: true })
   creationDateDisplay: String;

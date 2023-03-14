@@ -48,6 +48,11 @@ export class commandController {
     if (typeof request.body.id === "number") {
       request.body.id = request.body.id.toString();
     }
+    console.log(
+      request.body.load != undefined,
+      "request.body.load != undefined",
+      request.body.load
+    );
     if (request.body.load != undefined) {
       request.body.visit_id = request.body.id;
       request.body.id = request.body.title.toString();
@@ -68,7 +73,7 @@ export class commandController {
     const hours = date.getHours().toString().padStart(2, "0"); // heures, formaté sur 2 chiffres (ajoute un 0 au début si nécessaire)
     const minutes = date.getMinutes().toString().padStart(2, "0");
     request.body.creationDateDisplay = `${day}/${month}/${year}-${hours}:${minutes}`;
-    console.log(request.body.creationDate, "request.body.creationDate");
+    console.log(request.body, "request.body.creationDate");
     const commandRepository = getManager().getRepository(command);
     const result = await commandRepository.save(request.body);
     response.send(result);

@@ -43,20 +43,23 @@ export class authController {
   //     });
   //   });
 
-  public async check(verifyToken, request: Request, response: Response) {
+  public async check(request: Request, response: Response) {
+    console.log(request.body, "request.body de auth check ");
     const clientRepository = getManager().getRepository(client);
     const where = crudMethods.buildWhereClause({
       where: { id: request.body.id },
+      relations: ["role"],
     });
     const result = await clientRepository.find(where);
     console.log(result, "result check");
-    if (error) {
-      response.status(500).send("There was a problem finding the user.");
+
+    if (result.length == 0) {
+      response.send("No user found.");
+    } else if (result.length == 1) {
+      response.send(result);
+    } else {
+      response.send("There was a problem finding the user.");
     }
-    if (!result) {
-      response.status(401).send("No user found.");
-    }
-    response.status(200).send(result);
   }
 
   public async save(request: Request, response: Response) {
